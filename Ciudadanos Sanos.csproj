@@ -16,4 +16,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Doctor\" />
+    <Folder Include="Pages\Patiente\" />
+  </ItemGroup>
+
 </Project>
