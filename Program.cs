@@ -1,3 +1,6 @@
+using Ciudadanos_Sanos.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Ciudadanos_Sanos
 {
 	public class Program
@@ -16,6 +19,8 @@ namespace Ciudadanos_Sanos
 
 
 			});
+
+			builder.Services.AddDbContext<CentrosaludContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("CentrodesaludDB")));
 
 			var app = builder.Build();
 
