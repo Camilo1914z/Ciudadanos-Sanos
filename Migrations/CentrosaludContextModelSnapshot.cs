@@ -22,6 +22,43 @@ namespace Ciudadanos_Sanos.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Ciudadanos_Sanos.Models.AgendacionCita", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AgendacionCitaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Doctor_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatienteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Patiente_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgendacionCitaId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatienteId");
+
+                    b.ToTable("AgendacionCitas");
+                });
+
             modelBuilder.Entity("Ciudadanos_Sanos.Models.Doctor", b =>
                 {
                     b.Property<int>("Id")
@@ -153,6 +190,29 @@ namespace Ciudadanos_Sanos.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Ciudadanos_Sanos.Models.AgendacionCita", b =>
+                {
+                    b.HasOne("Ciudadanos_Sanos.Models.AgendacionCita", null)
+                        .WithMany("AgendacionCitas")
+                        .HasForeignKey("AgendacionCitaId");
+
+                    b.HasOne("Ciudadanos_Sanos.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ciudadanos_Sanos.Models.Patiente", "Patiente")
+                        .WithMany()
+                        .HasForeignKey("PatienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Patiente");
+                });
+
             modelBuilder.Entity("Ciudadanos_Sanos.Models.Doctor", b =>
                 {
                     b.HasOne("Ciudadanos_Sanos.Models.Doctor", null)
@@ -191,6 +251,11 @@ namespace Ciudadanos_Sanos.Migrations
                     b.HasOne("Ciudadanos_Sanos.Models.Register", null)
                         .WithMany("Users")
                         .HasForeignKey("RegisterId");
+                });
+
+            modelBuilder.Entity("Ciudadanos_Sanos.Models.AgendacionCita", b =>
+                {
+                    b.Navigation("AgendacionCitas");
                 });
 
             modelBuilder.Entity("Ciudadanos_Sanos.Models.Doctor", b =>

@@ -36,7 +36,7 @@ namespace Ciudadanos_Sanos.Pages.Account
             {
                 var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, "admin"),
+                new Claim(ClaimTypes.Name,registro.Email),
                 new Claim(ClaimTypes.Email, registro.Email),
             };
                 var identity = new ClaimsIdentity(claims, "MyCookieAuth");

@@ -66,6 +66,41 @@ namespace Ciudadanos_Sanos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AgendacionCitas",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Patiente_Id = table.Column<int>(type: "int", nullable: false),
+                    Doctor_Id = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DoctorId = table.Column<int>(type: "int", nullable: false),
+                    PatienteId = table.Column<int>(type: "int", nullable: false),
+                    AgendacionCitaId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AgendacionCitas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AgendacionCitas_AgendacionCitas_AgendacionCitaId",
+                        column: x => x.AgendacionCitaId,
+                        principalTable: "AgendacionCitas",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AgendacionCitas_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AgendacionCitas_Patientes_PatienteId",
+                        column: x => x.PatienteId,
+                        principalTable: "Patientes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MedicalHistories",
                 columns: table => new
                 {
@@ -115,6 +150,21 @@ namespace Ciudadanos_Sanos.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AgendacionCitas_AgendacionCitaId",
+                table: "AgendacionCitas",
+                column: "AgendacionCitaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AgendacionCitas_DoctorId",
+                table: "AgendacionCitas",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AgendacionCitas_PatienteId",
+                table: "AgendacionCitas",
+                column: "PatienteId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Doctors_DoctorId",
                 table: "Doctors",
                 column: "DoctorId");
@@ -143,6 +193,9 @@ namespace Ciudadanos_Sanos.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AgendacionCitas");
+
             migrationBuilder.DropTable(
                 name: "MedicalHistories");
 
