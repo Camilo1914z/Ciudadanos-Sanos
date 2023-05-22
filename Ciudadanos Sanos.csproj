@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Doctors\" />
     <Folder Include="Pages\MedicalHistorys\" />
   </ItemGroup>
 
