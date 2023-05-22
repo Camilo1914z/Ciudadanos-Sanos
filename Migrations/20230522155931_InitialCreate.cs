@@ -52,6 +52,20 @@ namespace Ciudadanos_Sanos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Registers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Registers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MedicalHistories",
                 columns: table => new
                 {
@@ -80,6 +94,26 @@ namespace Ciudadanos_Sanos.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegisterId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_User_Registers_RegisterId",
+                        column: x => x.RegisterId,
+                        principalTable: "Registers",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Doctors_DoctorId",
                 table: "Doctors",
@@ -99,6 +133,11 @@ namespace Ciudadanos_Sanos.Migrations
                 name: "IX_Patientes_PatienteId",
                 table: "Patientes",
                 column: "PatienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_RegisterId",
+                table: "User",
+                column: "RegisterId");
         }
 
         /// <inheritdoc />
@@ -108,10 +147,16 @@ namespace Ciudadanos_Sanos.Migrations
                 name: "MedicalHistories");
 
             migrationBuilder.DropTable(
+                name: "User");
+
+            migrationBuilder.DropTable(
                 name: "Doctors");
 
             migrationBuilder.DropTable(
                 name: "Patientes");
+
+            migrationBuilder.DropTable(
+                name: "Registers");
         }
     }
 }

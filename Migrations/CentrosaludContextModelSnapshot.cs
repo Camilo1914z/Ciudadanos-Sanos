@@ -106,6 +106,53 @@ namespace Ciudadanos_Sanos.Migrations
                     b.ToTable("Patientes");
                 });
 
+            modelBuilder.Entity("Ciudadanos_Sanos.Models.Register", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Registers");
+                });
+
+            modelBuilder.Entity("Ciudadanos_Sanos.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RegisterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegisterId");
+
+                    b.ToTable("User");
+                });
+
             modelBuilder.Entity("Ciudadanos_Sanos.Models.Doctor", b =>
                 {
                     b.HasOne("Ciudadanos_Sanos.Models.Doctor", null)
@@ -139,6 +186,13 @@ namespace Ciudadanos_Sanos.Migrations
                         .HasForeignKey("PatienteId");
                 });
 
+            modelBuilder.Entity("Ciudadanos_Sanos.Models.User", b =>
+                {
+                    b.HasOne("Ciudadanos_Sanos.Models.Register", null)
+                        .WithMany("Users")
+                        .HasForeignKey("RegisterId");
+                });
+
             modelBuilder.Entity("Ciudadanos_Sanos.Models.Doctor", b =>
                 {
                     b.Navigation("Doctors");
@@ -147,6 +201,11 @@ namespace Ciudadanos_Sanos.Migrations
             modelBuilder.Entity("Ciudadanos_Sanos.Models.Patiente", b =>
                 {
                     b.Navigation("Patientes");
+                });
+
+            modelBuilder.Entity("Ciudadanos_Sanos.Models.Register", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
