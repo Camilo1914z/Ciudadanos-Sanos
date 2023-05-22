@@ -12,7 +12,7 @@ namespace Ciudadanos_Sanos.Models
 		[Required]
 		[DataType(DataType.Password)]
 		public string Password { get; set; }
-		public ICollection<User>? Users { get; set; }
+		
 
 
 	}

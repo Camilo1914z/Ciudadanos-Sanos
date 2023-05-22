@@ -20,4 +20,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Doctors\" />
+    <Folder Include="Pages\MedicalHistorys\" />
+    <Folder Include="Pages\Patientes\" />
+  </ItemGroup>
+
 </Project>
