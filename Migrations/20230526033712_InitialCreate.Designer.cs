@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ciudadanos_Sanos.Migrations
 {
     [DbContext(typeof(CentrosaludContext))]
-    [Migration("20230522193622_InitialCreate")]
+    [Migration("20230526033712_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -44,6 +44,14 @@ namespace Ciudadanos_Sanos.Migrations
 
                     b.Property<int>("Doctor_Id")
                         .HasColumnType("int");
+
+                    b.Property<string>("Document")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PatienteId")
                         .HasColumnType("int");

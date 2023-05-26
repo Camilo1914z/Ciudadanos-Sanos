@@ -42,6 +42,14 @@ namespace Ciudadanos_Sanos.Migrations
                     b.Property<int>("Doctor_Id")
                         .HasColumnType("int");
 
+                    b.Property<string>("Document")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("PatienteId")
                         .HasColumnType("int");
 

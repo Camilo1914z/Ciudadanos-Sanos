@@ -20,6 +20,7 @@ namespace Ciudadanos_Sanos.Pages.Patientes
         {
             return Page();
         }
+
         [BindProperty]
 
         public Patiente Patiente { get; set; } = default!;

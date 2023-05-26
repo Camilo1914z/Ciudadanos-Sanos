@@ -73,6 +73,8 @@ namespace Ciudadanos_Sanos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Patiente_Id = table.Column<int>(type: "int", nullable: false),
                     Doctor_Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Document = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
                     PatienteId = table.Column<int>(type: "int", nullable: false),

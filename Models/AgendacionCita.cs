@@ -6,11 +6,14 @@
 
 		public  int Patiente_Id	{get;set;}
 		public int Doctor_Id { get;set;}
-		public DateTime Date { get; set; }
-		public Doctor Doctor { get;set;}
-		public Patiente Patiente { get; set; } 
+        public string Name { get; set; }
 
-		public ICollection<AgendacionCita>? AgendacionCitas { get; set; }
+        public string Document { get; set; }
+        public DateTime Date { get; set; }
+		public Doctor Doctor { get;set;}
+		public Patiente Patiente { get; set; }
+
+		public ICollection<AgendacionCita>? AgendacionCitas { get; set; } 
 
     }
 }
